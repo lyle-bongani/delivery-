@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Client Dashboard</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="btn btn-link text-white me-3 d-lg-none" id="sidebarToggle">
+                <i class="bi bi-list fs-4"></i>
+            </button>
+            <a class="navbar-brand" href="#">Delivery App</a>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#newOrderModal">
+                    <i class="bi bi-plus-lg me-1"></i>New Order
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-link text-white dropdown-toggle" type="button" id="userDropdown"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-1"></i>
+                        <span id="clientName">Client</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#" data-page="profile"><i
+                                    class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#" data-page="addresses"><i
+                                    class="bi bi-geo-alt me-2"></i>Addresses</a></li>
+                        <li><a class="dropdown-item" href="#" data-page="settings"><i
+                                    class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#" id="logoutBtn"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <img src="../assets/client-avatar.png" alt="Client" class="rounded-circle mb-2"
+                            style="width: 80px; height: 80px; object-fit: cover;">
+                        <h5 class="text-white" id="sidebarClientName">Client Panel</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="active-orders.html">
+                                <i class="bi bi-clock-history me-2"></i>
+                                Active Orders
+                                <span class="badge bg-warning rounded-pill ms-2" id="activeOrdersBadge">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="order-history.html">
+                                <i class="bi bi-clock me-2"></i>
+                                Order History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="favorites.html">
+                                <i class="bi bi-heart me-2"></i>
+                                Favorites
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="notifications.html">
+                                <i class="bi bi-bell me-2"></i>
+                                Notifications
+                                <span class="badge bg-danger rounded-pill ms-2" id="notificationsBadge">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="help.html">
+                                <i class="bi bi-question-circle me-2"></i>
+                                Help & Support
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Notifications</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="refreshBtn">
+                                <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="markAllReadBtn">
+                                <i class="bi bi-check2-all me-1"></i>Mark All as Read
+                            </button>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                                id="filterDropdown" data-bs-toggle="dropdown">
+                                <i class="bi bi-funnel me-1"></i>Filter
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" data-filter="all">All Notifications</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="unread">Unread Only</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="orders">Order Updates</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="promotions">Promotions</a></li>
+                                <li><a class="dropdown-item" href="#" data-filter="system">System Messages</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications List -->
+                <div class="list-group" id="notificationsList">
+                    <!-- Notifications will be populated by JavaScript -->
+                </div>
+
+                <!-- No Notifications Message -->
+                <div id="noNotifications" class="text-center py-5 d-none">
+                    <i class="bi bi-bell fs-1 text-muted mb-3"></i>
+                    <h5>No Notifications</h5>
+                    <p class="text-muted">You don't have any notifications at the moment.</p>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-4 mb-5" id="loadMoreContainer">
+                    <button class="btn btn-outline-primary" id="loadMoreBtn">
+                        <i class="bi bi-arrow-down me-1"></i>Load More
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Notification Details Modal -->
+    <div class="modal fade" id="notificationDetailsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalNotificationTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi fs-1 me-3" id="modalNotificationIcon"></i>
+                        <div>
+                            <p class="text-muted mb-0" id="modalNotificationTime"></p>
+                            <p class="text-muted mb-0" id="modalNotificationType"></p>
+                        </div>
+                    </div>
+                    <div id="modalNotificationContent">
+                        <!-- Notification content will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="notificationActionBtn" style="display: none;">
+                        <!-- Action button will be populated by JavaScript -->
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Order Modal -->
+    <div class="modal fade" id="newOrderModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Place New Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newOrderForm">
+                        <!-- Delivery Address -->
+                        <div class="mb-4">
+                            <h6>Delivery Address</h6>
+                            <div class="row g-3" id="savedAddresses">
+                                <!-- Saved addresses will be populated by JavaScript -->
+                            </div>
+                            <button type="button" class="btn btn-outline-primary mt-2" id="addNewAddressBtn">
+                                <i class="bi bi-plus-lg me-1"></i>Add New Address
+                            </button>
+                        </div>
+
+                        <!-- Items Selection -->
+                        <div class="mb-4">
+                            <h6>Select Items</h6>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Search items..." id="itemSearch">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            <div class="row g-3" id="itemsList">
+                                <!-- Items will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Order Summary -->
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Order Summary</h6>
+                                <div id="orderSummary">
+                                    <!-- Order summary will be populated by JavaScript -->
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Total:</h5>
+                                    <h5 class="mb-0" id="orderTotal">$0.00</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="placeOrderBtn">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Address Modal -->
+    <div class="modal fade" id="newAddressModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newAddressForm">
+                        <div class="mb-3">
+                            <label class="form-label">Address Label</label>
+                            <input type="text" class="form-control" id="addressLabel" placeholder="e.g., Home, Office">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Street Address</label>
+                            <input type="text" class="form-control" id="streetAddress" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-control" id="state" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Postal Code</label>
+                            <input type="text" class="form-control" id="postalCode" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Additional Instructions</label>
+                            <textarea class="form-control" id="addressInstructions" rows="2"
+                                placeholder="e.g., Near the park, Call before delivery"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveAddressBtn">Save Address</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/client.js"></script>
+    <script src="../js/sidebar.js"></script>
+</body>
+
+</html>

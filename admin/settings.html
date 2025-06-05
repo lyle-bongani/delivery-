@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Admin Dashboard</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="btn btn-link text-white me-3 d-lg-none" id="sidebarToggle">
+                <i class="bi bi-list fs-4"></i>
+            </button>
+            <a class="navbar-brand" href="#">Delivery App Admin</a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <button class="btn btn-link text-white dropdown-toggle" type="button" id="userDropdown"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-1"></i>
+                        <span id="adminName">Admin</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#" data-page="profile"><i
+                                    class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#" data-page="settings"><i
+                                    class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#" id="logoutBtn"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <img src="../assets/admin-avatar.png" alt="Admin" class="rounded-circle mb-2"
+                            style="width: 80px; height: 80px; object-fit: cover;">
+                        <h5 class="text-white" id="sidebarAdminName">Admin Panel</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="orders.html">
+                                <i class="bi bi-cart me-2"></i>
+                                Orders
+                                <span class="badge bg-danger rounded-pill ms-2" id="newOrdersBadge">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="customers.html">
+                                <i class="bi bi-people me-2"></i>
+                                Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="delivery-staff.html">
+                                <i class="bi bi-truck me-2"></i>
+                                Delivery Staff
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="products.html">
+                                <i class="bi bi-box me-2"></i>
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="reports.html">
+                                <i class="bi bi-graph-up me-2"></i>
+                                Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="settings.html">
+                                <i class="bi bi-gear me-2"></i>
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="dashboard-container">
+                    <!-- Page Header -->
+                    <div class="page-header">
+                        <h1>Settings</h1>
+                        <div class="header-actions">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Settings Navigation -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="list-group list-group-flush">
+                                        <a href="#general" class="list-group-item list-group-item-action active">
+                                            <i class="fas fa-cog"></i> General Settings
+                                        </a>
+                                        <a href="#notifications" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-bell"></i> Notifications
+                                        </a>
+                                        <a href="#security" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-shield-alt"></i> Security
+                                        </a>
+                                        <a href="#appearance" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-paint-brush"></i> Appearance
+                                        </a>
+                                        <a href="#integrations" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-plug"></i> Integrations
+                                        </a>
+                                        <a href="#backup" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-database"></i> Backup & Restore
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <!-- General Settings -->
+                            <div id="general" class="settings-section">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">General Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label">Company Name</label>
+                                                <input type="text" class="form-control" value="Delivery Admin">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" value="admin@example.com">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" value="+1 234 567 890">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Address</label>
+                                                <textarea class="form-control"
+                                                    rows="3">123 Business Street, City, Country</textarea>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Time Zone</label>
+                                                <select class="form-select">
+                                                    <option value="UTC">UTC</option>
+                                                    <option value="EST">Eastern Time (EST)</option>
+                                                    <option value="CST">Central Time (CST)</option>
+                                                    <option value="PST">Pacific Time (PST)</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Currency</label>
+                                                <select class="form-select">
+                                                    <option value="USD">USD ($)</option>
+                                                    <option value="EUR">EUR (€)</option>
+                                                    <option value="GBP">GBP (£)</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div id="notifications" class="settings-section d-none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Notification Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label">Email Notifications</label>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="emailOrders"
+                                                        checked>
+                                                    <label class="form-check-label" for="emailOrders">New Orders</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="emailDeliveries"
+                                                        checked>
+                                                    <label class="form-check-label" for="emailDeliveries">Delivery
+                                                        Updates</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="emailCustomers">
+                                                    <label class="form-check-label" for="emailCustomers">New Customer
+                                                        Registrations</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Push Notifications</label>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="pushOrders"
+                                                        checked>
+                                                    <label class="form-check-label" for="pushOrders">New Orders</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="pushDeliveries"
+                                                        checked>
+                                                    <label class="form-check-label" for="pushDeliveries">Delivery
+                                                        Updates</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="pushSystem">
+                                                    <label class="form-check-label" for="pushSystem">System
+                                                        Updates</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security Settings -->
+                            <div id="security" class="settings-section d-none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Security Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label">Change Password</label>
+                                                <input type="password" class="form-control mb-2"
+                                                    placeholder="Current Password">
+                                                <input type="password" class="form-control mb-2"
+                                                    placeholder="New Password">
+                                                <input type="password" class="form-control"
+                                                    placeholder="Confirm New Password">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Two-Factor Authentication</label>
+                                                <div class="form-check form-switch">
+                                                    <input type="checkbox" class="form-check-input" id="2faToggle">
+                                                    <label class="form-check-label" for="2faToggle">Enable 2FA</label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Session Timeout (minutes)</label>
+                                                <input type="number" class="form-control" value="30">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Login Attempts</label>
+                                                <input type="number" class="form-control" value="5">
+                                                <small class="text-muted">Number of failed attempts before account
+                                                    lockout</small>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Appearance Settings -->
+                            <div id="appearance" class="settings-section d-none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Appearance Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label">Theme</label>
+                                                <select class="form-select">
+                                                    <option value="light">Light</option>
+                                                    <option value="dark">Dark</option>
+                                                    <option value="system">System Default</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Primary Color</label>
+                                                <input type="color" class="form-control form-control-color"
+                                                    value="#0d6efd">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Font Size</label>
+                                                <select class="form-select">
+                                                    <option value="small">Small</option>
+                                                    <option value="medium" selected>Medium</option>
+                                                    <option value="large">Large</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Sidebar Position</label>
+                                                <select class="form-select">
+                                                    <option value="left">Left</option>
+                                                    <option value="right">Right</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Integration Settings -->
+                            <div id="integrations" class="settings-section d-none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Integration Settings</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label">Payment Gateway</label>
+                                                <select class="form-select">
+                                                    <option value="stripe">Stripe</option>
+                                                    <option value="paypal">PayPal</option>
+                                                    <option value="square">Square</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">API Key</label>
+                                                <input type="password" class="form-control" value="sk_test_...">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Google Maps API Key</label>
+                                                <input type="password" class="form-control" value="AIza...">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">SMS Gateway</label>
+                                                <select class="form-select">
+                                                    <option value="twilio">Twilio</option>
+                                                    <option value="nexmo">Nexmo</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Backup & Restore -->
+                            <div id="backup" class="settings-section d-none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">Backup & Restore</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <h6>Backup Database</h6>
+                                            <p class="text-muted">Create a backup of your database and files</p>
+                                            <button class="btn btn-primary">
+                                                <i class="fas fa-download"></i> Create Backup
+                                            </button>
+                                        </div>
+                                        <div class="mb-4">
+                                            <h6>Restore Database</h6>
+                                            <p class="text-muted">Restore from a previous backup</p>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" accept=".zip,.sql">
+                                                <button class="btn btn-outline-primary">
+                                                    <i class="fas fa-upload"></i> Upload Backup
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <h6>Automatic Backups</h6>
+                                            <div class="form-check form-switch">
+                                                <input type="checkbox" class="form-check-input" id="autoBackup" checked>
+                                                <label class="form-check-label" for="autoBackup">Enable Automatic
+                                                    Backups</label>
+                                            </div>
+                                            <div class="mt-2">
+                                                <label class="form-label">Backup Frequency</label>
+                                                <select class="form-select">
+                                                    <option value="daily">Daily</option>
+                                                    <option value="weekly">Weekly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/sidebar.js"></script>
+</body>
+
+</html>

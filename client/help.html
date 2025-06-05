@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Client Dashboard</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="btn btn-link text-white me-3 d-lg-none" id="sidebarToggle">
+                <i class="bi bi-list fs-4"></i>
+            </button>
+            <a class="navbar-brand" href="#">Delivery App</a>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#newOrderModal">
+                    <i class="bi bi-plus-lg me-1"></i>New Order
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-link text-white dropdown-toggle" type="button" id="userDropdown"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-1"></i>
+                        <span id="clientName">Client</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#" data-page="profile"><i
+                                    class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#" data-page="addresses"><i
+                                    class="bi bi-geo-alt me-2"></i>Addresses</a></li>
+                        <li><a class="dropdown-item" href="#" data-page="settings"><i
+                                    class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#" id="logoutBtn"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <img src="../assets/client-avatar.png" alt="Client" class="rounded-circle mb-2"
+                            style="width: 80px; height: 80px; object-fit: cover;">
+                        <h5 class="text-white" id="sidebarClientName">Client Panel</h5>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="active-orders.html">
+                                <i class="bi bi-clock-history me-2"></i>
+                                Active Orders
+                                <span class="badge bg-warning rounded-pill ms-2" id="activeOrdersBadge">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="order-history.html">
+                                <i class="bi bi-clock me-2"></i>
+                                Order History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="favorites.html">
+                                <i class="bi bi-heart me-2"></i>
+                                Favorites
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="notifications.html">
+                                <i class="bi bi-bell me-2"></i>
+                                Notifications
+                                <span class="badge bg-danger rounded-pill ms-2" id="notificationsBadge">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="help.html">
+                                <i class="bi bi-question-circle me-2"></i>
+                                Help & Support
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Help & Support</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#contactSupportModal">
+                            <i class="bi bi-envelope me-1"></i>Contact Support
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Help -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search help topics..." id="helpSearch">
+                            <button class="btn btn-primary" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-book fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">FAQs</h5>
+                                <p class="card-text">Find answers to frequently asked questions about our delivery
+                                    service.</p>
+                                <a href="#faqSection" class="btn btn-outline-primary">View FAQs</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-earmark-text fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">User Guide</h5>
+                                <p class="card-text">Learn how to use all features of our delivery platform
+                                    effectively.</p>
+                                <a href="#userGuideSection" class="btn btn-outline-primary">Read Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-telephone fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Contact Us</h5>
+                                <p class="card-text">Get in touch with our support team for personalized
+                                    assistance.</p>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#contactSupportModal">Contact Support</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQs Section -->
+                <section id="faqSection" class="mb-5">
+                    <h3 class="mb-4">Frequently Asked Questions</h3>
+                    <div class="accordion" id="faqAccordion">
+                        <!-- Ordering -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faqOrdering">
+                                    Ordering
+                                </button>
+                            </h2>
+                            <div id="faqOrdering" class="accordion-collapse collapse show"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="mb-3">
+                                        <h6>How do I place an order?</h6>
+                                        <p>Click the "New Order" button in the top navigation bar, select your delivery
+                                            address, choose items from our catalog, and proceed to checkout.</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h6>Can I modify my order after placing it?</h6>
+                                        <p>Orders can be modified within 5 minutes of placement, as long as they haven't
+                                            been accepted by a delivery partner. Use the "Modify Order" option in your
+                                            active orders.</p>
+                                    </div>
+                                    <div>
+                                        <h6>What payment methods are accepted?</h6>
+                                        <p>We accept credit/debit cards, digital wallets, and cash on delivery for
+                                            eligible orders.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faqDelivery">
+                                    Delivery
+                                </button>
+                            </h2>
+                            <div id="faqDelivery" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="mb-3">
+                                        <h6>How long does delivery take?</h6>
+                                        <p>Delivery times vary based on your location and current demand. You can see
+                                            estimated delivery times when placing your order.</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h6>Can I track my delivery?</h6>
+                                        <p>Yes, you can track your delivery in real-time through the "Active Orders"
+                                            section of your dashboard.</p>
+                                    </div>
+                                    <div>
+                                        <h6>What if my delivery is delayed?</h6>
+                                        <p>If your delivery is delayed, you'll receive notifications with updates. You
+                                            can also contact support for assistance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account & Security -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faqAccount">
+                                    Account & Security
+                                </button>
+                            </h2>
+                            <div id="faqAccount" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="mb-3">
+                                        <h6>How do I update my profile information?</h6>
+                                        <p>Go to your profile settings through the user dropdown menu in the top
+                                            navigation bar.</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <h6>How can I manage my saved addresses?</h6>
+                                        <p>Access your saved addresses through the "Addresses" option in your profile
+                                            menu.</p>
+                                    </div>
+                                    <div>
+                                        <h6>Is my payment information secure?</h6>
+                                        <p>Yes, we use industry-standard encryption to protect your payment information.
+                                            We never store your full card details on our servers.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- User Guide Section -->
+                <section id="userGuideSection" class="mb-5">
+                    <h3 class="mb-4">User Guide</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Getting Started</h5>
+                                    <ol class="mb-0">
+                                        <li>Create your account or log in</li>
+                                        <li>Add your delivery addresses</li>
+                                        <li>Browse available items</li>
+                                        <li>Place your first order</li>
+                                        <li>Track your delivery</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Features Guide</h5>
+                                    <ul class="mb-0">
+                                        <li>Order Management</li>
+                                        <li>Delivery Tracking</li>
+                                        <li>Favorite Items</li>
+                                        <li>Order History</li>
+                                        <li>Notifications</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Information -->
+                <section id="contactSection" class="mb-5">
+                    <h3 class="mb-4">Contact Information</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Customer Support</h5>
+                                    <p class="card-text">
+                                        <i class="bi bi-telephone me-2"></i>+1 (555) 123-4567<br>
+                                        <i class="bi bi-envelope me-2"></i>support@deliveryapp.com<br>
+                                        <i class="bi bi-clock me-2"></i>24/7 Support
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Business Hours</h5>
+                                    <p class="card-text">
+                                        Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                        Saturday: 10:00 AM - 4:00 PM<br>
+                                        Sunday: Closed
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Social Media</h5>
+                                    <p class="card-text">
+                                        <a href="#" class="text-decoration-none me-3">
+                                            <i class="bi bi-facebook"></i> Facebook
+                                        </a><br>
+                                        <a href="#" class="text-decoration-none me-3">
+                                            <i class="bi bi-twitter"></i> Twitter
+                                        </a><br>
+                                        <a href="#" class="text-decoration-none">
+                                            <i class="bi bi-instagram"></i> Instagram
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Contact Support Modal -->
+    <div class="modal fade" id="contactSupportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contact Support</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactSupportForm">
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <select class="form-select" id="supportSubject" required>
+                                <option value="">Select a subject</option>
+                                <option value="order">Order Issue</option>
+                                <option value="delivery">Delivery Problem</option>
+                                <option value="account">Account Help</option>
+                                <option value="payment">Payment Issue</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Order Number (if applicable)</label>
+                            <input type="text" class="form-control" id="orderNumber">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" id="supportMessage" rows="4" required
+                                placeholder="Please describe your issue in detail..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Attachments (optional)</label>
+                            <input type="file" class="form-control" id="supportAttachments" multiple>
+                            <div class="form-text">You can attach screenshots or relevant documents (max 5MB each)</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="submitSupportBtn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Order Modal -->
+    <div class="modal fade" id="newOrderModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Place New Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newOrderForm">
+                        <!-- Delivery Address -->
+                        <div class="mb-4">
+                            <h6>Delivery Address</h6>
+                            <div class="row g-3" id="savedAddresses">
+                                <!-- Saved addresses will be populated by JavaScript -->
+                            </div>
+                            <button type="button" class="btn btn-outline-primary mt-2" id="addNewAddressBtn">
+                                <i class="bi bi-plus-lg me-1"></i>Add New Address
+                            </button>
+                        </div>
+
+                        <!-- Items Selection -->
+                        <div class="mb-4">
+                            <h6>Select Items</h6>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Search items..." id="itemSearch">
+                                <button class="btn btn-outline-secondary" type="button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            <div class="row g-3" id="itemsList">
+                                <!-- Items will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Order Summary -->
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">Order Summary</h6>
+                                <div id="orderSummary">
+                                    <!-- Order summary will be populated by JavaScript -->
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Total:</h5>
+                                    <h5 class="mb-0" id="orderTotal">$0.00</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="placeOrderBtn">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Address Modal -->
+    <div class="modal fade" id="newAddressModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newAddressForm">
+                        <div class="mb-3">
+                            <label class="form-label">Address Label</label>
+                            <input type="text" class="form-control" id="addressLabel" placeholder="e.g., Home, Office">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Street Address</label>
+                            <input type="text" class="form-control" id="streetAddress" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">State</label>
+                                <input type="text" class="form-control" id="state" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Postal Code</label>
+                            <input type="text" class="form-control" id="postalCode" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Additional Instructions</label>
+                            <textarea class="form-control" id="addressInstructions" rows="2"
+                                placeholder="e.g., Near the park, Call before delivery"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveAddressBtn">Save Address</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/client.js"></script>
+    <script src="../js/sidebar.js"></script>
+</body>
+
+</html>
